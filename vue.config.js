@@ -7,5 +7,7 @@ module.exports = {
       .loader('sass-loader')
       .end()
   },
-  transpileDependencies: true
-}
+  transpileDependencies: [
+    /\/node_modules\/vue\//,
+  ],
+};
