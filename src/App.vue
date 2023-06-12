@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HomeView />
+    <!-- <img alt="Vue logo" src="./assets/logo.png">
+    <HomeView /> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import HomeView from './components/HomeView.vue';
+// import HomeView from './components/HomeView.vue';
 
 export default {
   name: 'App',
   components: {
-    HomeView,
+    // HomeView,
   },
 };
 </script>

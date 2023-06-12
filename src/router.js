@@ -11,7 +11,8 @@ const routes = [
   {
     path: '/comic/:id',
     name: 'ComicDetail',
-    component: ComicDetailView
+    component: ComicDetailView,
+    props: true
   }
 ]
 

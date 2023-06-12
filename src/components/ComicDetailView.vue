@@ -22,19 +22,23 @@
 import { mapGetters, mapActions } from 'vuex';
 
 export default {
-  computed: {
-    ...mapGetters(['favoriteComics', 'isComicFavorite']),
-    comic() {
-      const comicId = this.$route.params.id;
-      return this.$store.state.comics.find((comic) => comic.id === comicId);
-    },
+computed: {
+  ...mapGetters(['favoriteComics', 'isComicFavorite']),
+  comic() {
+    const comicId = parseInt(this.$route.params.id); // Convert the id to an integer
+    return this.$store.state.comics.find((comic) => comic.id === comicId);
   },
+},
   methods: {
     ...mapActions(['addFavoriteComic']),
     addToFavorites(comic) {
       this.addFavoriteComic(comic);
     },
   },
+  // write mounted with console log inside to be sure we mount it
+  mounted() {
+    console.log('mounted');
+  }
 };
 </script>
 

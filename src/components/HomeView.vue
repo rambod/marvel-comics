@@ -71,7 +71,7 @@ export default {
             name: creator.name,
           })),
         }));
-        this.$store.commit('setComics', comics);
+        this.$store.dispatch('setComics', comics);
       } catch (error) {
         console.error('Error fetching comics:', error);
       }
