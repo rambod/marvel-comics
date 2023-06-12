@@ -18,6 +18,7 @@
         <button @click="addToFavorites(comic)" :disabled="isComicFavorite(comic.id)">
           {{ isComicFavorite(comic.id) ? 'Added to Favorites' : 'Add to Favorites' }}
         </button>
+        <router-link :to="`/comic/${comic.id}`">View Details</router-link>
         <hr>
       </div>
     </div>
