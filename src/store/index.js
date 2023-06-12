@@ -3,7 +3,8 @@ import { createStore } from 'vuex'
 export default createStore({
   state() {
     return {
-      favoriteComics: []
+      favoriteComics: [],
+      comics: [] // Add a new state property for storing fetched comics
     }
   },
   mutations: {
@@ -12,6 +13,9 @@ export default createStore({
     },
     removeFavoriteComic(state, comicId) {
       state.favoriteComics = state.favoriteComics.filter(comic => comic.id !== comicId)
+    },
+    setComics(state, comics) {
+      state.comics = comics // Define the setComics mutation
     }
   },
   actions: {
@@ -20,6 +24,9 @@ export default createStore({
     },
     removeFavoriteComic({ commit }, comicId) {
       commit('removeFavoriteComic', comicId)
+    },
+    setComics({ commit }, comics) {
+      commit('setComics', comics) // Define the setComics action
     }
   },
   getters: {
@@ -28,6 +35,9 @@ export default createStore({
     },
     isComicFavorite: (state) => (comicId) => {
       return state.favoriteComics.some(comic => comic.id === comicId)
+    },
+    comics(state) {
+      return state.comics // Define the comics getter
     }
   }
 })
