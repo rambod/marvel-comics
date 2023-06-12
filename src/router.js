@@ -1,15 +1,23 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import HomeView from './components/HomeView.vue';
-import ComicDetail from './components/ComicDetail.vue';
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from './components/HomeView.vue'
+import ComicDetailView from './components/ComicDetailView.vue'
 
 const routes = [
-  { path: '/', component: HomeView },
-  { path: '/comic/:id', component: ComicDetail },
-];
+  {
+    path: '/',
+    name: 'Home',
+    component: HomeView
+  },
+  {
+    path: '/comic/:id',
+    name: 'ComicDetail',
+    component: ComicDetailView
+  }
+]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
-});
+  routes
+})
 
-export default router;
+export default router
