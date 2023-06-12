@@ -21,6 +21,11 @@
         <hr>
       </div>
     </div>
+
+    <div class="favorites">
+      <i class="favorite-icon"></i>
+      <span class="favorites-count-badge">{{ favoritesCount }}</span>
+    </div>
   </div>
 </template>
 
@@ -33,12 +38,15 @@ const PUBLIC_KEY = '5d0380427d854a1243be8e5434ecb8e8';
 const PRIVATE_KEY = 'e21cb3c98c93cfaa361c4c7fee196e5b8680a73b';
 
 export default {
-computed: {
-  ...mapGetters(['favoriteComics', 'isComicFavorite']),
-  comics() {
-    return this.$store.state.comics || [];
+  computed: {
+    ...mapGetters(['favoriteComics', 'isComicFavorite']),
+    comics() {
+      return this.$store.state.comics || [];
+    },
+    favoritesCount() {
+      return this.favoriteComics.length;
+    },
   },
-},
   methods: {
     ...mapActions(['addFavoriteComic']),
     async fetchComics() {
@@ -78,5 +86,22 @@ computed: {
 </script>
 
 <style scoped>
-/* Add component styles here */
+.favorites {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.favorite-icon {
+  /* Add the styles for the favorites icon (e.g., heart icon) here */
+}
+
+.favorites-count-badge {
+  margin-left: 5px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  background-color: #ff0000;
+  color: #ffffff;
+  font-weight: bold;
+}
 </style>
