@@ -1,0 +1,35 @@
+// mixins.scss
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin card {
+    border-radius: $card-border-radius;
+    box-shadow: $card-box-shadow;
+    background-color: #333;
+    &.dark-bg {
+            background-color: #333;
+            color: #fff;
+        }
+}
+
+@mixin button-reset {
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+@mixin dark-bg {
+    background-color: #333;
+    color: #fff;
+}
