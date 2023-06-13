@@ -6,7 +6,7 @@
     </div>
     <div class="comic-details" v-if="comic">
       <div class="comic-image">
-        <img :src="comic.thumbnail" :style="getComicImageStyle" alt="Comic Thumbnail">
+        <img :src="comic.thumbnail" :style="getComicImageStyle" alt="Comic Thumbnail" class="ratio-comic-image">
       </div>
       <div class="comic-info">
         <h2>{{ comic.title }}</h2>
@@ -79,6 +79,7 @@ export default {
 
 .comic-image img {
   width: 100%;
+  margin: 10px;
 }
 
 .comic-info {
@@ -93,6 +94,11 @@ export default {
 
 .comic-info p {
   margin-bottom: 10px;
+}
+.ratio-comic-image{
+  max-height: 80vh; /* Set the maximum height to 60% of the viewport height */
+  width: auto; /* Let the width adjust automatically based on the image's aspect ratio */
+  max-width: 100%; /* Set the maximum width to prevent image overflow */
 }
 
 .favorite-button {

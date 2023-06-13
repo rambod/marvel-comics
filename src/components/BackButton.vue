@@ -19,7 +19,7 @@ export default {
 
 <style lang="scss" scoped>
 .back-button {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(229, 9, 20, 0.8);
   color: $secondary-color;
   padding: 5px 10px;
   border: none;
