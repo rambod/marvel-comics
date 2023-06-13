@@ -1,5 +1,4 @@
 // mixins.scss
-@import url('https://fonts.googleapis.com/css2?family=KoHo:ital@1&display=swap');
 
 @mixin flex-center {
     display: flex;
@@ -38,5 +37,4 @@
 
 @mixin body{
     font-size: $font-size;
-    font-family: 'KoHo', sans-serif;
 }

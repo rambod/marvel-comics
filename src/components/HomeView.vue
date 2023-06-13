@@ -1,8 +1,14 @@
 <template>
   <div>
-    <div class="banner">
-      <!-- Placeholder for the banner image -->
-    </div>
+<div class="banner">
+<img :src="bannerImage" alt="Banner Image">
+      <h1 class="banner-title">Marvel Comics</h1>
+      <div class="banner-buttons">
+        <button class="banner-button signup-button">Sign up</button>
+        <button class="banner-button login-button">Login</button>
+      </div>
+</div>
+
     <h1>Marvel Comics</h1>
     <div v-if="comics.length === 0">
       Loading comics...
@@ -32,6 +38,8 @@
 import { mapGetters, mapActions } from 'vuex';
 import axios from 'axios';
 import md5 from 'md5';
+import bannerImage from '@/assets/Leonardo.jpg';
+
 
 const PUBLIC_KEY = '5d0380427d854a1243be8e5434ecb8e8';
 const PRIVATE_KEY = 'e21cb3c98c93cfaa361c4c7fee196e5b8680a73b';
@@ -46,6 +54,12 @@ export default {
       return this.favoriteComics.length;
     },
   },
+  data() {
+  return {
+    bannerImage: bannerImage,
+  };
+},
+
   methods: {
     ...mapActions(['addFavoriteComic', 'removeFavoriteComic']),
     async fetchComics() {
@@ -103,7 +117,7 @@ export default {
 <style scoped>
 .banner {
   position: relative;
-  height: 300px; /* Set the desired height of the banner */
+  height: 300px;
   overflow: hidden;
 }
 
@@ -114,7 +128,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 0, 0, 0.6); /* Set the background color with opacity */
+  background-color: rgba(255, 0, 0, 0.139);
 }
 
 .banner img {
@@ -123,6 +137,40 @@ export default {
   object-fit: cover;
 }
 
+.banner-title {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #fff;
+  font-size: 44px;
+  font-weight: bold;
+}
+
+.banner-buttons {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+}
+
+.banner-button {
+  background-color: transparent;
+  border: none;
+  padding: 10px 20px;
+  margin-right: 10px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signup-button {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.login-button {
+  background-color: rgba(0, 0, 0, 0.5);
+}
 .banner h2 {
   position: absolute;
   bottom: 20px;

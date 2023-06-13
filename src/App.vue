@@ -13,20 +13,13 @@ export default {
 <style lang="scss">
 @import '@/assets/scss/variables';
 @import '@/assets/scss/mixins';
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=KoHo:ital@1&display=swap');
-@font-face {
-  font-family: "Raleway";
-  src: local("Raleway"),
-   url(./assets/fonts/Raleway.ttf) format("truetype");
-}
-
+@import url('https://fonts.googleapis.com/css2?family=Bangers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Boogaloo&display=swap');
 body {
   background-color: #1c1c1c; /* Replace with your desired dark color */
   margin: 0;
   padding: 0;
-font-family: 'Raleway', sans-serif;
-}
+font-family: 'KoHo', sans-serif;}
 
 #app {
   font-family: $font-family;
@@ -36,7 +29,7 @@ font-family: 'Raleway', sans-serif;
   color: $secondary-color;
   margin-top: 60px;
   color: #fbf8f8;
-
+font-family: 'Boogaloo', cursive;
 }
 .dark-bg {
   background-color: #333;
