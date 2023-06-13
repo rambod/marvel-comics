@@ -1,13 +1,13 @@
 <template>
   <div>
-<div class="banner">
-<img :src="bannerImage" alt="Banner Image">
+    <div class="banner">
+      <img :src="bannerImage" alt="Banner Image">
       <h1 class="banner-title">Marvel Comics</h1>
       <div class="banner-buttons">
         <button class="banner-button signup-button">Sign up</button>
         <button class="banner-button login-button">Login</button>
       </div>
-</div>
+    </div>
 
     <h1>Marvel Comics</h1>
     <div v-if="comics.length === 0">
@@ -17,11 +17,11 @@
       <div class="grid">
         <div v-for="(comic, index) in comics" :key="comic.id" :style="getComicStyle(index)" class="card">
           <img :src="comic.thumbnail" alt="Comic Thumbnail">
-      <button @click="toggleFavorite(comic)"  class="favorite-button">
-        <i v-if="!isComicFavorite(comic.id)" class="fas fa-heart"></i>
-        <i v-else class="fas fa-heartbeat"></i>
-      </button>
-
+          <div class="card-title">{{ comic.title }}</div>
+          <button @click="toggleFavorite(comic)" class="favorite-button">
+            <i v-if="!isComicFavorite(comic.id)" class="fas fa-heart"></i>
+            <i v-else class="fas fa-heartbeat"></i>
+          </button>
           <router-link :to="`/comic/${comic.id}`">View Details</router-link>
         </div>
       </div>
@@ -40,7 +40,6 @@ import axios from 'axios';
 import md5 from 'md5';
 import bannerImage from '@/assets/Leonardo.jpg';
 
-
 const PUBLIC_KEY = '5d0380427d854a1243be8e5434ecb8e8';
 const PRIVATE_KEY = 'e21cb3c98c93cfaa361c4c7fee196e5b8680a73b';
 
@@ -55,11 +54,10 @@ export default {
     },
   },
   data() {
-  return {
-    bannerImage: bannerImage,
-  };
-},
-
+    return {
+      bannerImage: bannerImage,
+    };
+  },
   methods: {
     ...mapActions(['addFavoriteComic', 'removeFavoriteComic']),
     async fetchComics() {
@@ -83,19 +81,12 @@ export default {
         console.error('Error fetching comics:', error);
       }
     },
-       toggleFavorite(comic) {
+    toggleFavorite(comic) {
       if (this.isComicFavorite(comic.id)) {
         this.removeFavoriteComic(comic.id);
       } else {
         this.addFavoriteComic(comic);
       }
-    },
-    addToFavorites(comic) {
-      this.addFavoriteComic(comic);
-    },
-
-        removeFromFavorites(comic) {
-      this.$store.dispatch('removeFavoriteComic', comic.id);
     },
     getComicStyle(index) {
       const row = Math.floor(index / 6);
@@ -103,8 +94,9 @@ export default {
       return {
         gridRow: `${row + 1}`,
         gridColumn: `${col + 1}`,
-        height: '200px', // Set your desired height
-        width: '150px', // Set your desired width
+        height: '200px',
+        width: '150px',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
       };
     },
   },
@@ -209,17 +201,22 @@ export default {
 
 /* Example styles for the card */
 .grid .card {
-  background-color: #ffffff;
+  background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   padding: 10px;
   text-align: center;
-  
 }
+
 
 /* Example styles for the favorites icon and count badge */
 .favorite-icon {
   /* Add the styles for the favorites icon (e.g., heart icon) here */
+}
+.card-title {
+  font-size: 12px;
+  margin-top: 10px;
+  color: #fff;
 }
 
 .favorite-button {
