@@ -3,15 +3,17 @@
     <div class="banner">
       <img :src="bannerImage" alt="Banner Image">
       <h1 class="banner-title">Marvel Comics</h1>
+      
       <div class="banner-buttons">
         <button class="banner-button signup-button">Sign up</button>
         <button class="banner-button login-button">Login</button>
       </div>
     </div>
-
-    <h1>Marvel Comics</h1>
     <div v-if="comics.length === 0">
       Loading comics...
+      <div v-if="isLoading" class="loading-indicator">
+  <div class="loading-spinner"></div>
+</div>
     </div>
     <div v-else>
       <div class="grid-container">
@@ -58,12 +60,14 @@ export default {
   data() {
     return {
       bannerImage: bannerImage,
+      isLoading: true,
     };
   },
   methods: {
     ...mapActions(['addFavoriteComic', 'removeFavoriteComic']),
     async fetchComics() {
       try {
+        this.isLoading = true;
         const timestamp = Date.now().toString();
         const hash = md5(timestamp + PRIVATE_KEY + PUBLIC_KEY);
         const response = await axios.get('https://gateway.marvel.com/v1/public/comics', {
@@ -81,7 +85,9 @@ export default {
         this.$store.dispatch('setComics', comics);
       } catch (error) {
         console.error('Error fetching comics:', error);
-      }
+      }finally {
+    this.isLoading = false; // Hide the loading indicator
+  }
     },
     toggleFavorite(comic) {
       if (this.isComicFavorite(comic.id)) {
@@ -315,8 +321,35 @@ export default {
   margin-top: 20px;
 }
 
-.favorite-icon {
-  /* Add the styles for the favorites icon (e.g., heart icon) here */
+.loading-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f33a3a;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: loading 0.8s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .favorites-count-badge {
