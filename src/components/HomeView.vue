@@ -3,13 +3,13 @@
     <div class="banner">
       <!-- Placeholder for the banner image -->
     </div>
-    <h1>Home Page</h1>
+    <h1>Marvel Comics</h1>
     <div v-if="comics.length === 0">
       Loading comics...
     </div>
     <div v-else>
       <div class="grid">
-        <div v-for="(comic, index) in comics" :key="comic.id" :style="getComicStyle(index)">
+        <div v-for="(comic, index) in comics" :key="comic.id" :style="getComicStyle(index)" class="card">
           <img :src="comic.thumbnail" alt="Comic Thumbnail">
           <button @click="addToFavorites(comic)" :disabled="isComicFavorite(comic.id)">
             {{ isComicFavorite(comic.id) ? 'Added to Favorites' : 'Add to Favorites' }}
@@ -89,7 +89,66 @@ export default {
 
 <style scoped>
 .banner {
-  /* Add styles for the banner image placeholder */
+  position: relative;
+  height: 300px; /* Set the desired height of the banner */
+  overflow: hidden;
+}
+
+.banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.6); /* Set the background color with opacity */
+}
+
+.banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner h2 {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: #ffffff;
+  font-size: 32px; /* Adjust the font size */
+}
+
+.banner p {
+  position: absolute;
+  bottom: 60px;
+  left: 20px;
+  color: #ffffff;
+  font-size: 16px; /* Adjust the font size */
+}
+
+/* Add any additional styles or modifications as needed */
+
+/* Example styles for the card */
+.grid .card {
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Example styles for the favorites icon and count badge */
+.favorite-icon {
+  /* Add the styles for the favorites icon (e.g., heart icon) here */
+}
+
+.favorites-count-badge {
+  margin-left: 5px;
+  padding: 2px 5px;
+  border-radius: 50%;
+  background-color: #ff0000;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .grid {

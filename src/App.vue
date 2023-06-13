@@ -31,7 +31,7 @@ body {
   text-align: center;
   color: $secondary-color;
   margin-top: 60px;
-  color: #000;
+  color: #fbf8f8;
 
 }
 .dark-bg {
