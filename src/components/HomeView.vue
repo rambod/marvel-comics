@@ -14,15 +14,17 @@
       Loading comics...
     </div>
     <div v-else>
-      <div class="grid">
+      <div class="grid-container">
         <div v-for="(comic, index) in comics" :key="comic.id" :style="getComicStyle(index)" class="card">
           <img :src="comic.thumbnail" alt="Comic Thumbnail">
-          <div class="card-title">{{ comic.title }}</div>
           <button @click="toggleFavorite(comic)" class="favorite-button">
             <i v-if="!isComicFavorite(comic.id)" class="fas fa-heart"></i>
             <i v-else class="fas fa-heartbeat"></i>
           </button>
-          <router-link :to="`/comic/${comic.id}`">View Details</router-link>
+          <router-link :to="`/comic/${comic.id}`" class="view-details-button">
+            View Details
+          </router-link>
+          <p class="card-title">{{ comic.title }}</p>
         </div>
       </div>
     </div>
@@ -209,14 +211,56 @@ export default {
 }
 
 
-/* Example styles for the favorites icon and count badge */
-.favorite-icon {
-  /* Add the styles for the favorites icon (e.g., heart icon) here */
+.view-details-button {
+  background-color: rgba(255, 0, 0, 0.5);
+  color: #ffffff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px;
+  opacity: 0.9;
 }
+
+.view-details-button:hover {
+  background-color: rgba(255, 0, 0, 0.7);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 10px;
+  margin: 20px; /* Centers the grid horizontally */
+}
+
+.card {
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  min-height: 350px; /* Adjust the min-height as needed */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.card img {
+  width: auto;
+  object-fit: contain;
+  height: auto;
+  width: 80%; /* Adjust the width as needed */
+  max-height: 50%; /* Adjust the maximum height as needed */
+  object-fit: contain;
+}
+
 .card-title {
-  font-size: 12px;
+  color: #ffffff;
+  font-size: 14px;
   margin-top: 10px;
-  color: #fff;
 }
 
 .favorite-button {
