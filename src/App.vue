@@ -13,15 +13,19 @@ export default {
 <style lang="scss">
 @import '@/assets/scss/variables';
 @import '@/assets/scss/mixins';
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=KoHo:ital@1&display=swap');
 @font-face {
-  font-family: 'Raleway';
-  src: url('@/assets/fonts/Raleway.ttf') format('truetype'),
+  font-family: "Raleway";
+  src: local("Raleway"),
+   url(./assets/fonts/Raleway.ttf) format("truetype");
 }
+
 body {
   background-color: #1c1c1c; /* Replace with your desired dark color */
   margin: 0;
   padding: 0;
- font-family: 'Raleway', sans-serif;
+font-family: 'Raleway', sans-serif;
 }
 
 #app {

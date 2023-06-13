@@ -11,15 +11,17 @@
       <div class="grid">
         <div v-for="(comic, index) in comics" :key="comic.id" :style="getComicStyle(index)" class="card">
           <img :src="comic.thumbnail" alt="Comic Thumbnail">
-          <button @click="addToFavorites(comic)" :disabled="isComicFavorite(comic.id)">
-            {{ isComicFavorite(comic.id) ? 'Added to Favorites' : 'Add to Favorites' }}
-          </button>
+      <button @click="toggleFavorite(comic)"  class="favorite-button">
+        <i v-if="!isComicFavorite(comic.id)" class="fas fa-heart"></i>
+        <i v-else class="fas fa-heartbeat"></i>
+      </button>
+
           <router-link :to="`/comic/${comic.id}`">View Details</router-link>
         </div>
       </div>
     </div>
 
-    <div class="favorites">
+    <div class="favorites-badge">
       <i class="favorite-icon"></i>
       <span class="favorites-count-badge">{{ favoritesCount }}</span>
     </div>
@@ -45,7 +47,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['addFavoriteComic']),
+    ...mapActions(['addFavoriteComic', 'removeFavoriteComic']),
     async fetchComics() {
       try {
         const timestamp = Date.now().toString();
@@ -67,8 +69,19 @@ export default {
         console.error('Error fetching comics:', error);
       }
     },
+       toggleFavorite(comic) {
+      if (this.isComicFavorite(comic.id)) {
+        this.removeFavoriteComic(comic.id);
+      } else {
+        this.addFavoriteComic(comic);
+      }
+    },
     addToFavorites(comic) {
       this.addFavoriteComic(comic);
+    },
+
+        removeFromFavorites(comic) {
+      this.$store.dispatch('removeFavoriteComic', comic.id);
     },
     getComicStyle(index) {
       const row = Math.floor(index / 6);
@@ -125,7 +138,25 @@ export default {
   color: #ffffff;
   font-size: 16px; /* Adjust the font size */
 }
+.remove-fav-button {
+  background-color: #ff0000; /* Set the background color */
+  color: #ffffff; /* Set the text color */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px; 
+}
 
+.remove-fav-button:hover {
+  background-color: #ff3333; /* Adjust the hover background color */
+}
+
+.remove-fav-button:disabled {
+  opacity: 0.4; /* Adjust the opacity for the disabled state */
+  /* cursor: not-allowed; */
+}
 /* Add any additional styles or modifications as needed */
 
 /* Example styles for the card */
@@ -135,11 +166,32 @@ export default {
   border-radius: 4px;
   padding: 10px;
   text-align: center;
+  
 }
 
 /* Example styles for the favorites icon and count badge */
 .favorite-icon {
   /* Add the styles for the favorites icon (e.g., heart icon) here */
+}
+
+.favorite-button {
+  background-color: rgba(255, 0, 0, 0.6); /* Set the background color with opacity */
+  color: #000000; /* Set the text color */
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px; 
+}
+
+.favorite-button:hover {
+  background-color: rgba(255, 0, 0, 0.8); /* Adjust the hover background color */
+}
+
+.favorite-button:disabled {
+  opacity: 0.4; /* Adjust the opacity for the disabled state */
+  /* cursor: not-allowed; */
 }
 
 .favorites-count-badge {
@@ -185,5 +237,12 @@ export default {
   background-color: #ff0000;
   color: #ffffff;
   font-weight: bold;
+}
+.favorites-badge {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  margin: 10px;
+  z-index: 9999;
 }
 </style>

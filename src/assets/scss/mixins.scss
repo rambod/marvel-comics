@@ -1,4 +1,5 @@
 // mixins.scss
+@import url('https://fonts.googleapis.com/css2?family=KoHo:ital@1&display=swap');
 
 @mixin flex-center {
     display: flex;
@@ -15,9 +16,10 @@
 @mixin card {
     border-radius: $card-border-radius;
     box-shadow: $card-box-shadow;
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.8);
+    color: #af0808;
     &.dark-bg {
-            background-color: #333;
+            background-color: #b92222;
             color: #fff;
         }
 }
@@ -32,4 +34,9 @@
 @mixin dark-bg {
     background-color: #333;
     color: #fff;
+}
+
+@mixin body{
+    font-size: $font-size;
+    font-family: 'KoHo', sans-serif;
 }
